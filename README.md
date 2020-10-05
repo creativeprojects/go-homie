@@ -14,14 +14,22 @@ device.
     AddNode("bme280", "BME280 via ESP8266EX", "bme280").
     AddProperty("temperature", "Temperature", homie.TypeFloat).SetUnit("°C").Node().
     AddProperty("pressure", "Pressure", homie.TypeFloat).SetUnit("hPa").Node().
-    AddProperty("humidity", "Humidity", homie.TypeFloat).SetUnit("%").Node()
+    AddProperty("humidity", "Humidity", homie.TypeFloat).SetUnit("%")
 ```
 
-Send the Homie attributes to the MQTT client:
+Send the Homie attributes and or values to the MQTT client:
 
 ```go
+// all homie attributes
 for _, attribute := range device.GetHomieAttributes() {
     publish(attribute.Topic, attribute.Value)
+}
+
+// all property values
+for _, attribute := range device.GetValues() {
+    if attribute.Value != "" {
+        publish(attribute.Topic, attribute.Value)
+    }
 }
 ```
 
@@ -41,7 +49,10 @@ func onSet(topic, value string, dataType homie.PropertyType) {
     publish(topic, value)
 }
 
-// install the callback
+// either install a global callback on the device...
+device.OnSet(onSet)
+
+// ...or install the callback on this property only
 device.Node("bmp280").Property("temperature").OnSet(onSet)
 
 // new values will be published for you
