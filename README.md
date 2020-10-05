@@ -2,7 +2,7 @@
 
 The [Homie convention](https://homieiot.github.io/) defines a standardized way of how IoT devices and services announce themselves and their data on the MQTT broker.
 
-This library is MQTT implementation agnostic: it only generates and manages topics and values, not actually sending through the wire.
+This library is MQTT implementation agnostic: it only generates and manages topics and values, not actually sending them through the wire.
 
 See an example on how to define a Homie device:
 
