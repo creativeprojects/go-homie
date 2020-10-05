@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// Node definition
 type Node struct {
 	device     *Device
 	prefix     string
@@ -35,7 +36,7 @@ func newNode(device *Device, prefix, id, name, nodeType string) *Node {
 // ID is used to create topics: homie/device/node/<ID>/...
 // Name is the fullname of the property
 //
-// It will panic if ID cannot be used in a topic. You should check with IsValidID
+// It will panic if ID cannot be used in a topic. You can check with IsValidID before calling the method.
 func (n *Node) AddProperty(id, name string, propertyType PropertyType) *Property {
 	prop := newProperty(n, n.prefix, id, name, propertyType)
 	n.properties[id] = prop
@@ -48,6 +49,8 @@ func (n *Node) Device() *Device {
 	return n.device
 }
 
+// Property returns the property from the name.
+// it returns nil if the property does not exist
 func (n *Node) Property(id string) *Property {
 	return n.properties[id]
 }

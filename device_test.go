@@ -21,6 +21,21 @@ func TestEmptyDeviceAttributes(t *testing.T) {
 	assert.Empty(t, values)
 }
 
+func TestChangeRootOfEmptyDeviceAttributes(t *testing.T) {
+	device := NewDevice("deviceID", "deviceName").SetRoot("unit/test")
+	attributes := device.GetHomieAttributes()
+	values := device.GetValues()
+
+	assert.ElementsMatch(t, attributes, []TopicValuePair{
+		{"unit/test/deviceID/$homie", "4.0.0"},
+		{"unit/test/deviceID/$name", "deviceName"},
+		{"unit/test/deviceID/$state", "init"},
+		{"unit/test/deviceID/$nodes", ""},
+		{"unit/test/deviceID/$extensions", ""},
+	})
+	assert.Empty(t, values)
+}
+
 func TestDeviceAttributes(t *testing.T) {
 	device := NewDevice("deviceID", "deviceName")
 	device.
@@ -81,4 +96,22 @@ func TestPropertySetters(t *testing.T) {
 	assert.NotEmpty(t, props["homie/deviceID/node1/prop1/set"])
 	assert.NotEmpty(t, props["homie/deviceID/node2/prop2/set"])
 	assert.NotEmpty(t, props["homie/deviceID/node2/prop3/set"])
+}
+
+func TestSetCallbackOnChangeState(t *testing.T) {
+	call := false
+	onSet := func(topic, value string, dataType PropertyType) {
+		call = true
+		assert.Equal(t, "homie/deviceID/$state", topic)
+		assert.Equal(t, "sleeping", value)
+	}
+	device := NewDevice("deviceID", "deviceName").OnSet(onSet)
+	device.SetState(StateSleeping)
+	assert.True(t, call)
+}
+
+func TestUndefinedNode(t *testing.T) {
+	device := NewDevice("deviceID", "deviceName")
+	node := device.Node("nodeID")
+	assert.Nil(t, node)
 }

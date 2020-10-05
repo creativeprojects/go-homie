@@ -3,6 +3,8 @@ package homie
 import "strings"
 
 // IsValidID checks the ID can be used in a topic.
+//
+// see documentation: https://homieiot.github.io/specification/#topic-ids
 func IsValidID(id string) bool {
 	if id == "" || strings.HasPrefix(id, "-") || strings.HasSuffix(id, "-") {
 		return false

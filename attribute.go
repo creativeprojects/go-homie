@@ -15,9 +15,8 @@ const (
 	attributeRetained     = "$retained"
 )
 
-// TopicValuePair represents a MQTT topic, value and data type
+// TopicValuePair represents a MQTT topic and value pair
 type TopicValuePair struct {
 	Topic string
 	Value string
-	// DataType PropertyType
 }

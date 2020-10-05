@@ -50,3 +50,9 @@ func TestGetPropertySetters(t *testing.T) {
 	assert.Len(t, setters, 1)
 	assert.NotEmpty(t, setters["test/nodeID/prop2/set"])
 }
+
+func TestUndefinedProperty(t *testing.T) {
+	node := newNode(nil, "test", "nodeID", "nodeName", "nodeType")
+	property := node.Property("propertyID")
+	assert.Nil(t, property)
+}
