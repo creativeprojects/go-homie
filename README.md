@@ -54,3 +54,7 @@ device.Node("bme280").Property("temperature").Set(20.0)
 Please note this is work in progress.
 
 It might not tick all the boxes yet, but it does work: I'm using it in my IoT projects :)
+
+## Documentation
+
+See [go doc](https://pkg.go.dev/github.com/creativeprojects/go-homie)
