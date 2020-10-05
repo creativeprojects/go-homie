@@ -16,7 +16,7 @@ func TestGetSimplePropertyAttributes(t *testing.T) {
 }
 
 func TestGetFullPropertyAttributes(t *testing.T) {
-	prop := newProperty(nil, "test", "id", "name", TypeString).SetFormat("format").SetUnit("unit").Settable(true).Retained(false)
+	prop := newProperty(nil, "test", "id", "name", TypeString).SetFormat("format").SetUnit("unit").Settable(true).SetRetained(false)
 	attributes := prop.getAttributes()
 	assert.ElementsMatch(t, attributes, []TopicValuePair{
 		{"test/id/$name", "name"},

@@ -1,3 +1,5 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/creativeprojects/go-homie)](https://goreportcard.com/report/github.com/creativeprojects/go-homie)
+
 # Homie convention for Go
 
 The [Homie convention](https://homieiot.github.io/) defines a standardized way of how IoT devices and services announce themselves and their data on the MQTT broker.

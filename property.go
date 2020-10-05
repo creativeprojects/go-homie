@@ -91,7 +91,7 @@ func (p *Property) SetFormat(format string) *Property {
 
 // SetRetained changes the retained flag as described:
 // https://homieiot.github.io/specification/#property-attributes
-func (p *Property) Retained(retained bool) *Property {
+func (p *Property) SetRetained(retained bool) *Property {
 	p.retained = retained
 	return p
 }
