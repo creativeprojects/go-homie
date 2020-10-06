@@ -60,6 +60,8 @@ device.Node("bme280").Property("temperature").Set(20.0)
 
 ```
 
-## Documentation
+## More information
+
+See the [example](https://github.com/creativeprojects/go-homie/blob/main/example/main.go)
 
 See [go doc](https://pkg.go.dev/github.com/creativeprojects/go-homie)
